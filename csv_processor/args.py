@@ -10,7 +10,7 @@ def parse_args() -> argparse.Namespace:
         help="Путь к CSV-файлу"
     )
 
-    subparsers = parser.add_subparsers(dest="command", required=True)
+    subparsers = parser.add_subparsers(dest="command")
 
     
     where_parser = subparsers.add_parser("where", help="Фильтрация по условию")
