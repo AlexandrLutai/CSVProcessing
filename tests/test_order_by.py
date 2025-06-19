@@ -25,7 +25,7 @@ def test_order_by_numeric_and_string():
         {"name": "c", "price": "10"},
     ]
     sorted_data = order_by(data, "price", "asc")
-    # "abc" не число, поэтому будет после чисел
+    
     assert [row["price"] for row in sorted_data] == ["10", "20", "abc"]
 
 def test_order_by_no_column():
@@ -34,4 +34,4 @@ def test_order_by_no_column():
         {"name": "a", "price": "10"},
     ]
     sorted_data = order_by(data, None, None)
-    assert sorted_data == data  # Без сортировки возвращается исходный список
+    assert sorted_data == data  
