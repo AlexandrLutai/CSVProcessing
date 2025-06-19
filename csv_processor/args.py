@@ -1,5 +1,11 @@
 import argparse
 
+def add_order_by_argument(parser):
+    parser.add_argument(
+        "--order-by",
+        help='Сортировка по колонке, например: "price=desc" или "brand=asc"'
+    )
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Обработка CSV-файла с фильтрацией и агрегацией"
@@ -9,6 +15,7 @@ def parse_args() -> argparse.Namespace:
         required=True,
         help="Путь к CSV-файлу"
     )
+    add_order_by_argument(parser)
 
     subparsers = parser.add_subparsers(dest="command")
 
@@ -17,17 +24,14 @@ def parse_args() -> argparse.Namespace:
         "condition",
         help='Условие фильтрации, например: "rating>4.7" или "brand=apple"'
     )
-    where_parser.add_argument(
-        "--order-by",
-        help='Сортировка по колонке, например: "price=desc" или "brand=asc"'
-    )
+    add_order_by_argument(where_parser)
 
     aggregate_parser = subparsers.add_parser("aggregate", help="Агрегация по колонке")
     aggregate_parser.add_argument(
         "condition",
         help='Условие агрегации, например: "rating=avg"'
     )
-
+    add_order_by_argument(aggregate_parser)
 
     return parser.parse_args()
 
